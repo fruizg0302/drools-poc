@@ -64,6 +64,20 @@ rule "Postcode should be filled with exactly 5 numbers"
 end
 ```
 
+The given Drools rule is verifying that the postal code (`postcode`) of an `Address` object should be filled with exactly 5 numeric characters.
+
+Here's the breakdown of the rule:
+
+- **When:**
+  - `address : Address(postcode != null, postcode matches "([0-9]{5})")`: This part checks that the `postcode` field of the `Address` object is not `null`, and that it matches the regular expression `([0-9]{5})`. This regular expression ensures that the `postcode` consists of exactly 5 numeric characters (digits from 0 to 9).
+  - `checkResult : AddressCheckResult()`: This part checks for the presence of an `AddressCheckResult` object, which will be used to store the result of the rule verification.
+
+- **Then:**
+  - `checkResult.setPostCodeResult(true)`: If the conditions in the "when" part are met, this action is executed, and the result of the postal code verification is set to `true` in the `AddressCheckResult` object.
+  - `System.out.println("Verified!")`: This line prints "Verified!" to the console, indicating that the verification was successful.
+
+This rule verifies that the postal code of an address is exactly 5 digits long, and if so, sets the verification result to `true` and prints a confirmation message.
+
 ## How Drools is configured
  
 1. **Constants Definition**: The constant `RULES_PATH` is defined, which specifies the path to the rules directory within the classpath.
@@ -81,3 +95,25 @@ end
 7. **Conditional Configuration**: Most of these beans are defined with the annotation `@ConditionalOnMissingBean`, meaning that the bean will only be created if there's no existing bean of the same type already defined in the Spring context. This allows for custom overriding in other parts of the application if needed.
 
 8. **Utilities**: There are some private utility methods, like `getRuleFiles()` and `getKieServices()`, which help with retrieving rule files from the classpath and accessing the `KieServices` singleton, respectively.
+
+
+## How to test it?
+
+This input
+```
+curl "http://localhost:8080/test/address?num=5"
+```
+
+Should output the following:
+```
+Verified!
+1 rule
+Succesful rule verification
+```
+
+```
+curl "http://localhost:8080/test/address?num=1"
+0 rule fullfiled
+```
+
+
