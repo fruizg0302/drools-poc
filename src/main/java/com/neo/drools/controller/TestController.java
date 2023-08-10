@@ -29,7 +29,7 @@ public class TestController {
         kieSession.insert(result);
         int ruleFiredCount = kieSession.fireAllRules();
         kieSession.destroy();
-        System.out.println(ruleFiredCount + "rule");
+        System.out.println(" failed rule");
 
         if (result.isPostCodeResult()) {
             System.out.println("Succesful rule verification");

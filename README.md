@@ -45,7 +45,7 @@ mvn spring-boot:run
 ```
 
 
-How a rules file looks like?  
+### How a rules file looks like?  
 
 
 ```bash
@@ -64,3 +64,20 @@ rule "Postcode should be filled with exactly 5 numbers"
 end
 ```
 
+## How Drools is configured
+ 
+1. **Constants Definition**: The constant `RULES_PATH` is defined, which specifies the path to the rules directory within the classpath.
+
+2. **KieFileSystem Bean**: Defines a Spring Bean for the `KieFileSystem`, which is part of the Drools API for managing the storage of rule files. The method `kieFileSystem()` scans the classpath for rule files under the specified path and writes them into the `KieFileSystem`.
+
+3. **KieContainer Bean**: Defines a Spring Bean for the `KieContainer`, which is used to manage the knowledge bases and sessions in Drools. The method `kieContainer()` builds the Kie modules from the `KieFileSystem` and returns a new `KieContainer` instance with the default release ID.
+
+4. **KieBase Bean**: Defines a Spring Bean for the `KieBase`, representing a knowledge base in Drools. It's used to store all the compiled rules and other related data. The method `kieBase()` simply returns the `KieBase` from the `KieContainer`.
+
+5. **KieSession Bean**: Defines a Spring Bean for the `KieSession`, representing a runtime rule session in Drools. This is where rules are fired against data. The method `kieSession()` returns a new `KieSession` from the `KieContainer`.
+
+6. **KModuleBeanFactoryPostProcessor Bean**: Defines a Spring Bean for the `KModuleBeanFactoryPostProcessor`, a class specific to the integration of Kie (Knowledge Is Everything) modules with Spring. This is likely used to support some particular integration features between Spring and Drools.
+
+7. **Conditional Configuration**: Most of these beans are defined with the annotation `@ConditionalOnMissingBean`, meaning that the bean will only be created if there's no existing bean of the same type already defined in the Spring context. This allows for custom overriding in other parts of the application if needed.
+
+8. **Utilities**: There are some private utility methods, like `getRuleFiles()` and `getKieServices()`, which help with retrieving rule files from the classpath and accessing the `KieServices` singleton, respectively.
