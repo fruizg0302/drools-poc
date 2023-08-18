@@ -1,4 +1,4 @@
-package com.neo.drools;
+package com.paloit.drools;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

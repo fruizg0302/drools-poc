@@ -14,25 +14,28 @@
 
 
 ```bash
- .
-├── LICENSE
+.
 ├── README.md
-├── drools-demo-timer-windows
-│   ├── pom.xml
-│   └── src
-│       ├── main
-│       │   ├── java
-│       │   │   └── com
-│       │   │       └── hlover
-│       │   │           └── demo
-│       │   │               ├── DroolsDemoApplication.java
-│       │   │               ├── controller
-│       │   │               │   └── CEPController.java
-│       │   │               └── utils
-│       │   │                   └── KieSessionUtils.java
-│       │   └── resources
-│       │       ├── application.properties
-│
+├── pom.xml
+└── src
+    └── main
+        ├── java
+        │   └── com
+        │       └── neo
+        │           └── drools
+        │               ├── SpringBootDroolsApplication.java
+        │               ├── config
+        │               │   └── DroolsAutoConfiguration.java
+        │               ├── controller
+        │               │   └── TestController.java
+        │               └── model
+        │                   ├── Address.java
+        │                   └── fact
+        │                       └── AddressCheckResult.java
+        └── resources
+            ├── application.properties
+            └── rules
+                └── address.drl.bak
 ```
 
 
@@ -51,8 +54,8 @@ mvn spring-boot:run
 ```bash
 package plausibcheck.adress
 
-import com.neo.drools.model.Address;
-import com.neo.drools.model.fact.AddressCheckResult;
+import model.com.paloit.drools.Address;
+import fact.model.com.paloit.drools.AddressCheckResult;
 
 rule "Postcode should be filled with exactly 5 numbers"
     when

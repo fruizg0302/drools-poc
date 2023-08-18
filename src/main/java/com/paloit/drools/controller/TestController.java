@@ -1,14 +1,15 @@
-package com.neo.drools.controller;
+package com.paloit.drools.controller;
 
-import com.neo.drools.model.Address;
-import com.neo.drools.model.fact.AddressCheckResult;
+import com.paloit.drools.model.Address;
+import com.paloit.drools.model.fact.AddressCheckResult;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
+
 
 @RequestMapping("/test")
 @Controller
@@ -39,7 +40,7 @@ public class TestController {
 
     /**
      * Random number generator
-     * 
+     *
      * @param num
      * @return
      */

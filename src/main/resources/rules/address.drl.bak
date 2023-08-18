@@ -1,7 +1,7 @@
 package plausibcheck.adress
 
-import com.neo.drools.model.Address;
-import com.neo.drools.model.fact.AddressCheckResult;
+import com.paloit.drools.model.Address;
+import com.paloit.drools.model.fact.AddressCheckResult;
 
 rule "Postcode should be filled with exactly 5 numbers"
     when

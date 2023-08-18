@@ -1,4 +1,4 @@
-package com.neo.drools.model;
+package com.paloit.drools.model;
 
 
 public class Address {

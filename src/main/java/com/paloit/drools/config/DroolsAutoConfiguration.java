@@ -1,4 +1,4 @@
-package com.neo.drools.config;
+package com.paloit.drools.config;
 
 import org.kie.api.KieBase;
 import org.kie.api.KieServices;

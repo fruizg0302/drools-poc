@@ -1,4 +1,4 @@
-package com.neo.drools.model.fact;
+package com.paloit.drools.model.fact;
 
 public class AddressCheckResult {
 
