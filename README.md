@@ -4,8 +4,8 @@
 - **Java Version**: Java version specified in the properties is `1.8`. My runtime was configure with the following tools:
 
     ```bash
-    java corretto-8.322.06.4
-    maven 3.6.0
+  java adoptopenjdk-17.0.6+10
+  maven 3.6.0
     ```
 
 - **Drools Version**: The Drools version is specified as `7.0.0.Final`.
