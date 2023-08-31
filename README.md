@@ -115,8 +115,120 @@ Succesful rule verification
 ```
 
 ```
-curl "http://localhost:8080/test/address?num=1"
-0 rule fullfiled
+## Request
+curl -X "POST" "http://localhost:8080/proposal/validate" \
+     -H 'Content-Type: application/json; charset=utf-8' \
+     -d $'{
+  "beneficiaries": [
+    {
+      "contacts": {
+        "email": "name@gmail.com",
+        "phoneList": [
+          {
+            "ddd": 23,
+            "number": "2345165784",
+            "type": "Commercial"
+          }
+        ]
+      },
+      "identity": [
+        {
+          "documentType": "CPF",
+          "documentNumber": "08086361977",
+          "issuingAuthority": "CPF-S",
+          "issueDate": "2023-08-15"
+        }
+      ],
+      "relationship": "brother",
+      "percentage": 1,
+      "name": "name"
+    }
+  ],
+  "premiumValue": 150.12,
+  "installments": 0,
+  "capitalization": {
+    "serialNumber": 52,
+    "amount": 10.99,
+    "productKey": "7781",
+    "batchNumber": 123234,
+    "luckyNumber": 123234
+  },
+  "customer": {
+    "gender": "MALE",
+    "address": {
+      "street": "fifth avenue",
+      "number": "10",
+      "city": "Mexico",
+      "postalCode": "01350001",
+      "country": "MX",
+      "additionalInformation": "",
+      "neighborhood": "",
+      "state": "Veracruz"
+    },
+    "contact": {
+      "email": "antonio.almeida@cardif.com",
+      "phoneList": [
+        {
+          "ddd": 23,
+          "number": "2345165784",
+          "type": "Commercial"
+        }
+      ]
+    },
+    "birthDate": "20010131",
+    "fullName": "Juan Manuel",
+    "nationality": "BRA",
+    "occupation": "Analyst System",
+    "identity": [
+      {
+        "documentType": "CPF",
+        "documentNumber": "08086361977",
+        "issuingAuthority": "CPF-S",
+        "issueDate": "2023-08-15"
+      }
+    ],
+    "dpsCostumer": [
+      {
+        "answer": "answer",
+        "question": "my question",
+        "describedAnswer": "my description"
+      }
+    ],
+    "maritalStatus": "Single"
+  },
+  "proposalType": "PROPOSAL_CARREFOUR",
+  "endsAtDate": "20261231",
+  "contractNumber": "001",
+  "productCode": "002",
+  "startsAtDate": "20231231",
+  "registerType": "10",
+  "plan": "001",
+  "saleDate": "20201231",
+  "commission": {
+    "value": 2000,
+    "percentage": 10
+  },
+  "store": {
+    "storeId": "1",
+    "storeCode": 1,
+    "sellers": [
+      {
+        "name": "Ricardo Mendoza",
+        "type": "VENDOR",
+        "identityList": [
+          {
+            "documentType": "CPF",
+            "documentNumber": "08086361977",
+            "issuingAuthority": "CPF-S",
+            "issueDate": "2023-08-15"
+          }
+        ]
+      }
+    ]
+  },
+  "salesChannel": "ECOMMERCE"
+}'
+
 ```
 
 
