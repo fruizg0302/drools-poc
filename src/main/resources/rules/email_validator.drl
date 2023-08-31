@@ -1,0 +1,23 @@
+package rules
+
+import com.paloit.drools.model.Proposal;
+import com.paloit.drools.model.Customer;
+import com.paloit.drools.model.Contact;
+import com.paloit.drools.model.fact.ProposalCheckResult;
+
+rule "ValidateEmailFormat" salience 1
+lock-on-active
+no-loop true
+when
+    $proposal: Proposal($customer: customer != null)
+    $contact: Contact() from $customer.getContact()
+    String(this == null || this.trim().isEmpty() || this not matches "^[\\w\\.\\-]+@[\\w\\.\\-]+\\.\\w+$") from $contact.getEmail()
+    $result: ProposalCheckResult()
+then
+    $result.setValidEmailFormat(false);
+    $result.addValidationError("Invalid Email Format");
+    update($result);
+end
+
+
+

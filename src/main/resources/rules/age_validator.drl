@@ -1,0 +1,29 @@
+package rules
+
+import com.paloit.drools.model.Proposal;
+import com.paloit.drools.model.Customer;
+import com.paloit.drools.model.Contact;
+import com.paloit.drools.model.fact.ProposalCheckResult;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.Period;
+
+rule "ValidateAgeRange" salience 1
+lock-on-active
+no-loop true
+when
+    $proposal: Proposal($customer: customer != null)
+    String(this != null) from $customer.getBirthDate()
+    eval(calculateAge($customer.getBirthDate()) < 18 || calculateAge($customer.getBirthDate()) > 65)
+    $result: ProposalCheckResult()
+then
+    $result.setValidAgeRange(false);
+    $result.addValidationError("Age must be between 18 and 65 years");
+    update($result);
+end
+
+function int calculateAge(String birthDateStr) {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+    LocalDate birthDate = LocalDate.parse(birthDateStr, formatter);
+    return Period.between(birthDate, LocalDate.now()).getYears();
+}

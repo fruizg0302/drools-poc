@@ -11,11 +11,8 @@ com/paloit/drools/model/Proposal$Seller.class
 com/paloit/drools/model/fact/ProposalCheckResult.class
 com/paloit/drools/model/Customer$DpsCustomer.class
 com/paloit/drools/model/Identity.class
-com/paloit/drools/model/Customer$Contact.class
 com/paloit/drools/model/Proposal$Beneficiary.class
 com/paloit/drools/model/Proposal$Commission.class
 com/paloit/drools/model/Customer$Phone.class
-com/paloit/drools/controller/TestController.class
 com/paloit/drools/model/Customer.class
 com/paloit/drools/config/DroolsAutoConfiguration.class
-com/paloit/drools/model/fact/AddressCheckResult.class

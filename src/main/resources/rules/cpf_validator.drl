@@ -1,0 +1,21 @@
+package rules
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.Period;
+import com.paloit.drools.model.Customer;
+import com.paloit.drools.model.Proposal;
+import com.paloit.drools.model.Identity;
+import com.paloit.drools.model.fact.ProposalCheckResult;
+
+rule "ValidateCPF" salience 1
+lock-on-active
+no-loop true
+when
+    $proposal: Proposal($customer: customer != null)
+    $identity: Identity(documentType == "CPF", documentNumber.length() != 11) from $customer.getIdentity()
+    $result: ProposalCheckResult()
+then
+    $result.setValidDocumentNumber(false);
+    $result.addValidationError("Invalid CPF Document Length");
+    update($result);
+end

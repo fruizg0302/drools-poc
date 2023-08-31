@@ -2,20 +2,22 @@ package com.paloit.drools.controller;
 
 import com.paloit.drools.model.Proposal;
 import com.paloit.drools.model.fact.ProposalCheckResult;
-import com.paloit.drools.service.ProposalValidationService;
-import org.drools.core.event.DebugAgendaEventListener;
-import org.drools.core.event.DebugRuleRuntimeEventListener;
+import org.drools.core.base.RuleNameEqualsAgendaFilter;
+import org.drools.core.base.RuleNameMatchesAgendaFilter;
+import org.kie.api.command.Command;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.StatelessKieSession;
+import org.kie.api.runtime.rule.AgendaFilter;
+import org.kie.internal.command.CommandFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
+import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringJoiner;
 
 @RestController
@@ -28,22 +30,27 @@ public class ProposalController {
     private KieContainer kieContainer;
 
     @PostMapping("/validate")
-    public ResponseEntity<String> validateProposal(@RequestBody Proposal proposal) {
+    public ResponseEntity<String> validateProposal(@RequestBody Proposal proposal, @RequestParam(value = "rule", required = false) String regex) {
 
         KieSession kieSession = kieContainer.newKieSession();
-
         ProposalCheckResult result = new ProposalCheckResult();
-
-        ProposalValidationService service = new ProposalValidationService();
-        service.validateProposal(proposal, result);
 
         kieSession.insert(proposal);
         kieSession.insert(result);
-        int ruleFiredCount = kieSession.fireAllRules();
+
+        if (regex != null && !regex.isEmpty()) {
+            RuleNameEqualsAgendaFilter agendaFilter = new RuleNameEqualsAgendaFilter(regex);
+            kieSession.fireAllRules(agendaFilter);
+        } else {
+            kieSession.fireAllRules();
+        }
+
+        log.info("Result after rules fired: {}", result);
+
         kieSession.dispose();
 
-        if (result.isValidProposal()) {
-            return ResponseEntity.ok(ruleFiredCount + " set rules fulfilled. Proposal is valid.");
+        if (result.validProposalAttributes()) {
+            return ResponseEntity.ok("Set rules fulfilled. Proposal is valid.");
         } else {
             StringJoiner sj = new StringJoiner("\n");
             sj.add("Proposal is invalid for the following reasons:");
@@ -53,4 +60,5 @@ public class ProposalController {
             return ResponseEntity.badRequest().body(sj.toString());
         }
     }
+
 }

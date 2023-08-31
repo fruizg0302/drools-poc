@@ -1,4 +1,3 @@
-/Users/fernandoruiz/workspace/PALO-IT/drools-examples/spring-boot-drools/src/main/java/com/paloit/drools/model/fact/AddressCheckResult.java
 /Users/fernandoruiz/workspace/PALO-IT/drools-examples/spring-boot-drools/src/main/java/com/paloit/drools/config/DroolsAutoConfiguration.java
 /Users/fernandoruiz/workspace/PALO-IT/drools-examples/spring-boot-drools/src/main/java/com/paloit/drools/model/Proposal.java
 /Users/fernandoruiz/workspace/PALO-IT/drools-examples/spring-boot-drools/src/main/java/com/paloit/drools/service/ProposalValidationService.java
@@ -8,4 +7,4 @@
 /Users/fernandoruiz/workspace/PALO-IT/drools-examples/spring-boot-drools/src/main/java/com/paloit/drools/controller/ProposalController.java
 /Users/fernandoruiz/workspace/PALO-IT/drools-examples/spring-boot-drools/src/main/java/com/paloit/drools/model/Customer.java
 /Users/fernandoruiz/workspace/PALO-IT/drools-examples/spring-boot-drools/src/main/java/com/paloit/drools/model/Address.java
-/Users/fernandoruiz/workspace/PALO-IT/drools-examples/spring-boot-drools/src/main/java/com/paloit/drools/controller/TestController.java
+/Users/fernandoruiz/workspace/PALO-IT/drools-examples/spring-boot-drools/src/main/java/com/paloit/drools/model/Contact.java

@@ -29,6 +29,7 @@ public class Proposal {
     private String endsAtDate;
     private int installments;
     private Customer customer;
+    private Address address;
 
 
 

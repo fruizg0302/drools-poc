@@ -1,0 +1,16 @@
+package rules
+
+import com.paloit.drools.model.Proposal;
+import com.paloit.drools.model.fact.ProposalCheckResult;
+
+rule "ValidProposalType" salience 1
+lock-on-active
+no-loop true
+when
+    $proposal: Proposal(proposalType != "PROPOSAL_CARREFOUR")
+    $result: ProposalCheckResult()
+then
+    $result.setValidProposalType(false);
+    $result.addValidationError("Invalid or Missing Proposal Type");
+    update($result);
+end
